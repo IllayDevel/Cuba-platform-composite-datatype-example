@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <screen id="compositedatatype$Test.browse"
+            template="com/ledenevn/compositedatatype/web/test/test-browse.xml"/>
+    <screen id="compositedatatype$Driver.browse"
+            template="com/ledenevn/compositedatatype/web/driver/driver-browse.xml"/>
+    <screen id="compositedatatype$Personal.browse"
+            template="com/ledenevn/compositedatatype/web/personal/personal-browse.xml"/>
+</screen-config>

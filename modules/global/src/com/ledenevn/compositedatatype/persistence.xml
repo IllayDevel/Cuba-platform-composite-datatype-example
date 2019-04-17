@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="2.0">
+    <persistence-unit name="CompositeDatatype"
+                      transaction-type="RESOURCE_LOCAL">
+        <class>com.ledenevn.compositedatatype.entity.Test</class>
+        <class>com.ledenevn.compositedatatype.CompositeDatatypeConverter</class>
+        <class>com.ledenevn.compositedatatype.entity.Personal</class>
+        <class>com.ledenevn.compositedatatype.entity.Driver</class>
+    </persistence-unit>
+</persistence>
