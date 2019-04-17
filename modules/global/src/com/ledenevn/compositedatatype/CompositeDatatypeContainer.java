@@ -321,7 +321,9 @@ public class CompositeDatatypeContainer implements Serializable {
         if (hasEntity) {
             for (Entity e: getEntitys()) {
                 if (name.length()<nameLength) {
-                    name += e.getInstanceName()+nameDelimiter;
+                    if (e!=null) {
+                        name += e.getInstanceName() + nameDelimiter;
+                    }
                 } else {
                     return truncateName(name);
                 }
