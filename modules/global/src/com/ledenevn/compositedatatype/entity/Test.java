@@ -10,6 +10,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import javax.persistence.*;
 import com.ledenevn.compositedatatype.CompositeDatatypeContainer;
+import com.ledenevn.compositedatatype.CompositeDatatype;
 
 @NamePattern("%s|name")
 @Table(name = "COMPOSITEDATATYPE_TEST")
@@ -24,7 +25,7 @@ public class Test extends StandardEntity {
     @Column(name = "COMMENT_")
     protected String comment;
 
-    @MetaProperty(datatype = "CompositeDatatype")
+    @MetaProperty(datatype = CompositeDatatype.NAME)
     @Column(name = "CD")
     @Convert(converter = CompositeDatatypeConverter.class)
     protected CompositeDatatypeContainer cd;

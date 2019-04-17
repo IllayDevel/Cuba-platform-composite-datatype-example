@@ -232,7 +232,7 @@ public class CompositeDatatypeContainer implements Serializable {
     }
 
     private String truncateName(String name) {
-        return name.substring(0, nameLength)+"...";
+        return name.length()>=nameLength?name.substring(0, nameLength)+"...":name;
     }
 
     public String getName() {

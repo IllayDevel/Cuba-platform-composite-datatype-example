@@ -6,7 +6,7 @@
                 id="CompositeDatatype"
                 class="com.ledenevn.compositedatatype.CompositeDatatype"
                 javaType="com.ledenevn.compositedatatype.CompositeDatatypeContainer"
-                sqlType="text"
+                sqlType="longvarchar"
         />
     </datatypes>
 
