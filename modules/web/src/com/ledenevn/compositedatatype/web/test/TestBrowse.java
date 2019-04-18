@@ -3,6 +3,7 @@ package com.ledenevn.compositedatatype.web.test;
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.components.EntityCombinedScreen;
+import com.haulmont.cuba.gui.components.Field;
 import com.haulmont.cuba.gui.components.TextArea;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -13,7 +14,9 @@ import com.ledenevn.compositedatatype.entity.Test;
 
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
+import java.util.Map;
 
 public class TestBrowse extends EntityCombinedScreen {
 
@@ -23,6 +26,14 @@ public class TestBrowse extends EntityCombinedScreen {
     private TextArea textArea;
     @Inject
     private DataManager dataManager;
+    @Named("fieldGroup.cd")
+    private Field cd;
+
+    @Override
+    public void init(Map<String, Object> params) {
+        super.init(params);
+    }
+
 
     public void onAcCreateContainerClick() {
         LoadContext<Personal> contextPersonal = LoadContext.create(Personal.class);

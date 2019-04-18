@@ -1,0 +1,19 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<uiComponent xmlns="http://schemas.haulmont.com/studio/extension-config/ui-component.xsd">
+    <id>CompositeDataField</id>
+    <componentName>CompositeDataField</componentName>
+    <componentPackage>com.ledenevn.compositedatatype.component</componentPackage>
+    <componentClassName>CompositeDataField</componentClassName>
+    <componentModelClassName>CompositeDataFieldModel</componentModelClassName>
+    <componentNamespaceUri>http://schemas.ledenevn.com/compositedatatype/0.1/ui-component.xsd</componentNamespaceUri>
+    <componentNamespacePrefix>app</componentNamespacePrefix>
+    <standardProperties>
+        <datasource/>
+        <editable/>
+        <property/>
+        <icon/>
+        <caption/>
+    </standardProperties>
+    <customProperties>
+    </customProperties>
+</uiComponent>

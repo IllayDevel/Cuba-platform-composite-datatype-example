@@ -9,7 +9,8 @@
         class="com.ledenevn.compositedatatype.web.test.TestBrowse"
         focusComponent="table"
         lookupComponent="table"
-        messagesPack="com.ledenevn.compositedatatype.web.test">
+        messagesPack="com.ledenevn.compositedatatype.web.test"
+        xmlns:app="http://schemas.ledenevn.com/compositedatatype/0.1/ui-component.xsd">
     <dsContext>
         <datasource id="testDs"
                     class="com.ledenevn.compositedatatype.entity.Test"/>
@@ -60,6 +61,7 @@
                     </actions>
                     <columns>
                         <column id="name"/>
+                        <column id="cd"/>
                         <column id="comment"/>
                     </columns>
                     <rows datasource="testsDs"/>
@@ -91,6 +93,8 @@
                         </column>
                     </fieldGroup>
                 </scrollBox>
+                <app:CompositeDataField datasource="testDs"
+                                        property="cd"/>
                 <textArea id="textArea"
                           height="319px"
                           width="385px"/>

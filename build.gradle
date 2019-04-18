@@ -24,6 +24,7 @@ def modulePrefix = 'app'
 def globalModule = project(":${modulePrefix}-global")
 def coreModule = project(":${modulePrefix}-core")
 def webModule = project(":${modulePrefix}-web")
+def webToolkitModule = project(":${modulePrefix}-web-toolkit")
 
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
@@ -49,7 +50,7 @@ dependencies {
 
 def hsql = 'org.hsqldb:hsqldb:2.2.9'
 
-configure([globalModule, coreModule, webModule]) {
+configure([globalModule, coreModule, webModule, webToolkitModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
     apply(plugin: 'idea')
@@ -137,6 +138,14 @@ configure(webModule) {
         compile(globalModule)
 
     }
+
+    jar {
+        with copySpec {
+            from sourceSets.main.allJava
+            include "com/ledenevn/compositedatatype/web/toolkit/ui/client/**"
+        }
+    }
+
     
     task webArchive(type: Zip) {
         from file("$buildDir/web")
@@ -176,6 +185,47 @@ configure(webModule) {
     }
 }
 
+configure(webToolkitModule) {
+    dependencies {
+        compile(webModule)
+
+        
+    }
+    
+    jar {
+        from sourceSets.main.allJava
+    }
+    
+    task buildWidgetSet(type: CubaWidgetSetBuilding) {
+        widgetSetClass = 'com.ledenevn.compositedatatype.web.toolkit.ui.AppWidgetSet'
+    }
+    
+    task debugWidgetSet(type: CubaWidgetSetDebug) {
+        widgetSetClass = 'com.ledenevn.compositedatatype.web.toolkit.ui.AppWidgetSet'
+    } 
+
+    task webArchive(dependsOn: buildWidgetSet, type: Zip) {
+        from file("$buildDir/web")
+        classifier = 'web'
+    }
+
+    artifacts {
+        archives webArchive
+    }
+
+    task deploy(dependsOn: buildWidgetSet) {
+        doLast {
+            delete {
+                "$cuba.tomcat.dir/webapps/${modulePrefix}/VAADIN/widgetsets"
+            }
+            copy {
+                from "$buildDir/web"
+                into "$cuba.tomcat.dir/webapps/${modulePrefix}"
+            }
+        }
+    }
+}
+
 
 
 
@@ -186,7 +236,7 @@ task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
     delete("$cuba.tomcat.dir/webapps/${modulePrefix}")
 }
 
-task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy"], description: 'Redeploys applications and restarts local Tomcat') {
+task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy", ":${modulePrefix}-web-toolkit:deploy"], description: 'Redeploys applications and restarts local Tomcat') {
     doLast {
         ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
             not {
